@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-struct p_encoder
+typedef struct p_encoder
 {
-    char    c;
-    int     frecuency;
-    struct  encoder *next;    
-}t_encoder;
+	char	c;
+	int		frecuency;
+	struct	encoder *next;
+}	t_encoder;
 
