@@ -38,7 +38,7 @@ void	put_node(t_tree **lst, t_tree *node)
 	}
 }
 
-t_tree	*create_node(char l, int f)
+t_tree	*create_node(char l, int f, t_tree *right, t_tree *left)
 {
 	t_tree *encoder;
 
@@ -46,13 +46,21 @@ t_tree	*create_node(char l, int f)
 	encoder->c = l;
 	encoder->frecuency= f;
 	encoder->next = NULL;
-	encoder->right = NULL;
-	encoder->left = NULL;
+    encoder->right = right;
+    encoder->left = left;
 	return (encoder);
 }
 
 t_tree   *alloc_huffman_tree(t_tree *huffman_tree)
 {
-    (void)huffman_tree;
+    t_tree *aux;
+
+    aux = huffman_tree;
+    while (aux)
+    {
+        put_node(&huffman_tree, create_node(0, (aux->frecuency + aux->next->frecuency), aux, aux->next));
+        sort_list_by_frecuency(huffman_tree);
+        aux = aux->tree;
+    }
     return (0);
 }

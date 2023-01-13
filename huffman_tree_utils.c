@@ -49,7 +49,7 @@ t_tree	*find_frecuency(char *txt)
 	for (i = 0; i < 256; i++)
 	{
 		if (frecuency[i])
-			put_node(&encoder, create_node(i, frecuency[i]));
+			put_node(&encoder, create_node(i, frecuency[i], NULL, NULL));
 	}
 	sort_list_by_frecuency(&encoder);
 	return (encoder);
