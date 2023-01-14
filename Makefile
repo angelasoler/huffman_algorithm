@@ -1,17 +1,3 @@
-ifneq (,$(findstring xterm,${TERM}))
-	GREEN        := $(shell tput -Txterm setaf 2)
-	YELLOW       := $(shell tput -Txterm setaf 3)
-	RESET := $(shell tput -Txterm sgr0)
-endif
-
-define GIT =
-	git add .
-	git status
-	read -p "${YELLOW}Commit Message:${RESET}" commit_message
-	git commit -m "$$commit_message"
-	git push origin
-	git push labs
-endef
 
 NAME =	labs
 
@@ -43,8 +29,5 @@ fclean: clean
 
 clean:
 	@rm -rf *.o
-
-commit:
-	@$(GIT)
 
 .PONHY: re fclean clean all
