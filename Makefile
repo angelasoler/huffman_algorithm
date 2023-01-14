@@ -15,13 +15,14 @@ endef
 
 NAME =	labs
 
-CC = 	cc
+CC =	cc
 
 WFLAGS = -Wall -Werror -Wextra
 
 SRC =	encoder.c \
 		huffman_tree_utils.c \
-		list_utils.c
+		list_utils.c \
+		utils.c
 
 OBJ =	$(SRC:.c=.o)
 
@@ -41,18 +42,7 @@ fclean: clean
 	rm -rf $(NAME)
 
 clean:
-	@rm -rf _minishell_/*.o
-	@rm -rf environment/*.o
-	@rm -rf parser/*.o
-	@rm -rf executer/*.o
-	@rm -rf builtins/*.o
-	@rm -rf signals/*.o
-
-fclean_all: fclean
-	make fclean -C libft
-
-check:
-	dev_utils/run_pr_check.sh
+	@rm -rf *.o
 
 commit:
 	@$(GIT)
