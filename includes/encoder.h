@@ -10,6 +10,9 @@
 #define	HEAD 42
 #define UC unsigned char
 
+/**
+ * @brief huffman tree data structure
+ */
 typedef struct p_tree
 {
 	char	c;
@@ -19,6 +22,9 @@ typedef struct p_tree
 	struct	p_tree *left;
 }	t_tree;
 
+/**
+ * @brief sort frecuency list auxiliar data structure
+ */
 typedef struct p_sort
 {
 	t_tree	**head;
@@ -28,6 +34,9 @@ typedef struct p_sort
 	int		sort;
 }	t_sort;
 
+/**
+ * @brief bitwise operetion auxliar data structure
+ */
 typedef struct p_compress
 {
 	UC		*aux;
@@ -35,6 +44,9 @@ typedef struct p_compress
 	int		new_size;
 }	t_compress;
 
+/**
+ * @brief necessary data for decoder work
+ */
 typedef struct p_data
 {
 	char	*txt;

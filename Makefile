@@ -16,7 +16,7 @@ SRC =	encoder/encoder.c \
 OBJ =	$(SRC:.c=.o)
 
 all: $(NAME)
-
+	@make clean
 $(NAME): $(OBJ)
 	@echo "$(YELLOW)creating ./labs$(RESET)"
 	$(CC) $(WFLAGS) -g3 -o $(NAME) $(OBJ)

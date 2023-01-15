@@ -2,6 +2,9 @@
 #include <time.h>
 #include "encoder.h"
 
+/**
+ * @brief dedcodeing info
+ */
 typedef struct p_info
 {
 	int	encoded_bytes;
@@ -9,6 +12,9 @@ typedef struct p_info
 	int	time;
 }	t_info;
 
+/**
+ * @brief auxiliar structure for decoding
+ */
 typedef struct p_decode
 {
 	UC		*bin_txt;
