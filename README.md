@@ -22,14 +22,14 @@ Este projeto foi desenvolvido para a edição 4º do Labs da 42 sp.
 
 O programa deve comprimir e descomprimir textos, retornando informações sobre o processo.
 
-Para desenvolver essa utilidaded foi usado o algoritmo de huffman.
+Para desenvolver essa utilidade foi usado o algoritmo de huffman.
 
 ## :clipboard: FLUXO E DESENVOLVIMENTO
 
 Como já citado, o algoritmo de huffman é usado aqui para codificar e dedcodificar o input, veremos aqui visualmente o passo a passo que o programa faz, usando como exemplo o input "hello world":
 
-  1. Criar lista de frecuencia dos caracteres
-    O programa processa o input retornardo a quantidade de vezes que uma letra esta presente nele, com o objetivo de agrupar e reducir o que seriam varios chars em diferentes possições a apenas  dois dados, o char e a sua frecuencia:
+  1. Criar lista de frecuencia ordenada dos caracteres
+    O programa processa o input retornardo a quantidade de vezes que uma letra esta presente nele, ordenando ded forma accendente en relação a frecuencia de cada caracter, com o objetivo de agrupar e reducir o que seriam varios chars em diferentes possições a apenas  dois dados, o char e a sua frecuencia:
     
 ![image](https://user-images.githubusercontent.com/53455663/212553883-a229f526-932b-4668-bed4-84faaec07ea3.png)
 
@@ -44,10 +44,32 @@ Como já citado, o algoritmo de huffman é usado aqui para codificar e dedcodifi
 
   3. Percorrer arvore e gerar dicionario
   
-  
+      Ao percorrer a arvore se acha qual é a posição dos chars, o que retornará as cordenadas de zeros e uns para chegar nele apartir da cabeça da arvore.
+      A continução as cordenada de cada caracter:
+      
+![image](https://user-images.githubusercontent.com/53455663/212554843-51855b90-eb09-4eb2-82e2-b4754a809a1f.png)
 
-
-
+      Obs. A arvore deve ser percorrida de forma recursiva, para poder percorrer tanto o lado esquerdo quanto o direito e obter a altura das folhas na arvore.
+      
+   4. Codificar texto com dicionario
+      Aqui se percorre cada char do texto original e se concatena os codigos correspondentes do dicionario, criando uma string de zeros e ums que depois será exposta a operações bit wise agrupando de 8 em 8 para representar o 8 bits que formam um byte e finalmente teremos apenas os bytes que reprentam o texto comprimido.
+      
+       
+        |h   | e  |l  |l  |o   |     |w   |o   |r   |l  |d   |
+        |--  |--  |-- |-- |--  |---  |--  |--  |--  |-- |--  |
+        |110 |111 |01 |01 |001 |0001 |100 |001 |101 |01 |0000 |
+        
+        
+        
+        | 11011101 | 01001000 | 11000011 | 01010000 |
+        |---       |---       |---       |---       |
+        |    221   |    72    |    195   |    80    |
+        
+        
+        
+        | h | e | l | l | o |   | w | o | r | l | d |
+        |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+        |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:
 ## :gem: Acesse ferramentas usadas para planejar o projeto:
  - [Notion(Rascunhos)](https://www.notion.so/Huffman-Algorithm-8880a28c061649729f614456454cc72a)
  - [Github Canvan Board](https://github.com/users/angelasoler/projects/6/views/1)
