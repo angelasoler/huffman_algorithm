@@ -1,51 +1,39 @@
 
 #include "encoder.h"
-#define LEFT 0
-#define RIGHT 1
-#define	HEAD 42
 
-void	print_tree(t_tree *tree, int size, int flag)
-{
-	if (tree->c)
-	{
-		if (flag == RIGHT)
-			printf("\t\t\033[1;34m[right]\033[0m\n");
-		else if (flag == LEFT)
-			printf("\t\t\033[1;35m[left]\033[0m\n");
-		printf("\t\033[1;32m[LEAF]\033[0m => [%c]\t\033[1;33m[HEIGHT]\033[0m => [%d]\n", tree->c, size);
-	}
-	else
-	{
-		print_tree(tree->right, size + 1, RIGHT);
-		print_tree(tree->left, size + 1, LEFT);
-	}
-}
-
-void	print_lst(t_tree *tree)
+void	print_lst(t_tree *lst)
 {
 	t_tree	*aux;
 
-	aux = tree;
+	aux = lst;
 	printf("\t------FRECUENCY LIST-------");
 	while (aux)
 	{
 		printf("\n            [%c] => [%d]\n", aux->c, aux->frecuency);
 		aux = aux->next;
 	}
-	printf("\t--------------------\n");
+	printf("\t-------------------------\n");
 }
 
 void	ft_decoder(char *txt)
 {
 	t_tree	*tree;
 	t_tree	*frecuency_lst;
+	char	**table;
+	int		tree_height;
 
 	frecuency_lst = find_frecuency(txt);
 	print_lst(frecuency_lst);
 	tree = create_huffman_tree(&frecuency_lst);
-	printf("\t\t\033[1;33m------TREE------\033[0m\n");
+	tree_height = tree_height_ft(tree);
+	printf("\n\t\t\033[1;33m------TREE------\033[0m\n\n");
 	print_tree(tree, 0, HEAD);
+	printf("\n\t\t\033[1;33m----------------\033[0m\n");
+	table = alloc_table(tree_height);
+	create_table(table, tree, "", tree_height);
+	print_table(table);
 	free_tree(&tree);
+	free_table(table);
 }
 
 int	main(void)

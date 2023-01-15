@@ -5,6 +5,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#define LEFT 0
+#define RIGHT 1
+#define	HEAD 42
 
 typedef struct p_tree
 {
@@ -15,6 +18,15 @@ typedef struct p_tree
 	struct	p_tree *left;
 }	t_tree;
 
+typedef struct p_sort
+{
+	t_tree	**head;
+	t_tree	*p1;
+	t_tree	*p2;
+	int		size;
+	int		sort;
+}	t_sort;
+
 t_tree	*find_frecuency(char *txt);
 void	sort_list_by_frecuency(t_tree **tree);
 
@@ -24,3 +36,11 @@ void	put_node(t_tree **lst, t_tree *node);
 void	free_tree(t_tree **tree);
 int		count_lst(t_tree *lst);
 t_tree	*create_huffman_tree(t_tree **huffman_tree);
+
+void	print_tree(t_tree *tree, int size, int flag);
+void	print_table(char **table);
+
+void	free_table(char **table);;
+void	create_table(char **table, t_tree *tree, char *trail, int rows);
+int		tree_height_ft(t_tree *tree);
+char	**alloc_table(int rows);

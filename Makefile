@@ -8,7 +8,8 @@ WFLAGS = -Wall -Werror -Wextra
 SRC =	encoder.c \
 		huffman_tree_utils.c \
 		list_utils.c \
-		utils.c
+		binary_table_utils.c \
+		clear_utils.c
 
 OBJ =	$(SRC:.c=.o)
 

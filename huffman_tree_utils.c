@@ -34,39 +34,6 @@ t_tree	*create_huffman_tree(t_tree **huffman_tree)
 	return (aux);
 }
 
-void	sort_list_by_frecuency(t_tree **encoder)
-{
-	t_tree	**head;
-	t_tree	*p1;
-	t_tree	*p2;
-	int		size;
-	int		sort;
-	int		i;
-	int		n;
-
-	if (!*encoder)
-		return ;
-	size = count_lst(*encoder);
-	for (i = 0; i <= size; i++)
-	{
-		head = encoder;
-		sort = 0;
-		for (n = 0; n < size - i - 1; n++)
-		{
-			p1 = *head;
-			p2 = p1->next;
-			if (p1->frecuency > p2->frecuency)
-			{
-				*head = swap_nodes(p1, p2);
-				sort = 1;
-			}
-			head = &(*head)->next;
-		}
-		if (!sort)
-			break;
-	}
-}
-
 t_tree	*find_frecuency(char *txt)
 {
 	int		i;
@@ -91,14 +58,48 @@ t_tree	*find_frecuency(char *txt)
 	return (encoder);
 }
 
-void	free_tree(t_tree **tree)
+void	sort_list_by_frecuency(t_tree **encoder)
 {
-	t_tree	*aux;
+	t_sort	var;
+	int		i;
+	int		n;
 
-	aux = *tree;
-	if (!aux)
+	if (!*encoder)
 		return ;
-	free_tree(&aux->right);
-	free_tree(&aux->left);
-	free(aux);
+	var.size = count_lst(*encoder);
+	for (i = 0; i <= var.size; i++)
+	{
+		var.head = encoder;
+		var.sort = 0;
+		for (n = 0; n < var.size - i - 1; n++)
+		{
+			var.p1 = *var.head;
+			var.p2 = var.p1->next;
+			if (var.p1->frecuency > var.p2->frecuency)
+			{
+				*var.head = swap_nodes(var.p1, var.p2);
+				var.sort = 1;
+			}
+			var.head = &(*var.head)->next;
+		}
+		if (!var.sort)
+			break;
+	}
+}
+
+void	print_tree(t_tree *tree, int size, int flag)
+{
+	if (tree->c)
+	{
+		if (flag == RIGHT)
+			printf("\t\t\033[1;34m[right]\033[0m\n");
+		else if (flag == LEFT)
+			printf("\t\t\033[1;35m[left]\033[0m\n");
+		printf("\t\033[1;32m[LEAF]\033[0m => [%c]\t\033[1;33m[HEIGHT]\033[0m => [%d]\n", tree->c, size);
+	}
+	else
+	{
+		print_tree(tree->right, size + 1, RIGHT);
+		print_tree(tree->left, size + 1, LEFT);
+	}
 }
