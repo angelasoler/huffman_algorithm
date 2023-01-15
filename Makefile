@@ -10,7 +10,8 @@ SRC =	encoder/encoder.c \
 		encoder/list_utils.c \
 		encoder/dev_utils.c \
 		encoder/binary_table_utils.c \
-		encoder/clear_utils.c
+		encoder/clear_utils.c \
+		decoder/decoder.c
 
 OBJ =	$(SRC:.c=.o)
 
@@ -31,5 +32,6 @@ fclean: clean
 
 clean:
 	@rm -rf encoder/*.o
+	@rm -rf decoder/*.o
 
 .PONHY: re fclean clean all

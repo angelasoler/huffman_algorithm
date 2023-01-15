@@ -35,6 +35,15 @@ typedef struct p_compress
 	int		new_size;
 }	t_compress;
 
+typedef struct p_data
+{
+	char	*txt;
+	char	**table;
+	int		bit_size;
+}	t_data;
+
+void	conect_process(t_data *data);
+
 t_tree	*find_frecuency(char *txt);
 void	sort_list_by_frecuency(t_tree **tree);
 

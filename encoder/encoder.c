@@ -31,7 +31,7 @@ unsigned char	*encode_str_ft(char *txt, char **table)
 {
 	UC	*encoded_str;
 
-	encoded_str = calloc(sizeof(UC), 1024);
+	encoded_str = calloc(sizeof(UC), 10240);
 	while (*txt)
 	{
 		strcat((char*)encoded_str, table[(int)*txt]);
@@ -40,7 +40,7 @@ unsigned char	*encode_str_ft(char *txt, char **table)
 	return (encoded_str);
 }
 
-UC	*ft_encoder(char *txt)
+UC	*ft_encoder(char *txt, t_data *data)
 {
 	t_tree	*tree;
 	t_tree	*frecuency_lst;
@@ -58,11 +58,13 @@ UC	*ft_encoder(char *txt)
 	table = alloc_table(tree_height);
 	create_table(table, tree, "", tree_height);
 	print_table(table);
+	data->txt = txt;
+	data->table = table;
 	encoded_str = encode_str_ft(txt, table);
-	str_to_bytes(&encoded_str, strlen((char*)encoded_str));
+	data->bit_size = strlen((char*)encoded_str);
+	str_to_bytes(&encoded_str, data->bit_size);
 	print_enconded_bytes_str(encoded_str);
 	free_tree(&tree);
-	free_table(table);
 	return (encoded_str);
 }
 
@@ -70,17 +72,18 @@ int	main(void)
 {
 	char	*buff;
 	int		fd[2];
-	UC	*compress_str;
+	UC		*compress_str;
+	t_data	decoder_data;
 
-	buff = calloc(sizeof(char), 200);
+	buff = calloc(sizeof(char), 1024);
 	fd[0] = open("data/input_file", O_RDONLY);
 	fd[1] = open("data/compress_file", O_TRUNC | O_CREAT | O_WRONLY, 0644);
-	read(fd[0], buff, 200);
+	read(fd[0], buff, 1024);
 	close(fd[0]);
-	compress_str = ft_encoder(buff);
-	free(buff);
+	compress_str = ft_encoder(buff, &decoder_data);
 	write(fd[1], compress_str, strlen((char*)compress_str));
 	close(fd[1]);
 	free(compress_str);
+	conect_process(&decoder_data);
 	return (0);
 }
