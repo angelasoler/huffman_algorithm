@@ -49,21 +49,15 @@ UC	*ft_encoder(char *txt, t_data *data)
 	UC	*encoded_str;
 
 	frecuency_lst = find_frecuency(txt);
-	print_lst(frecuency_lst);
 	tree = create_huffman_tree(&frecuency_lst);
 	tree_height = tree_height_ft(tree);
-	printf("\n\t\t\033[1;33m------TREE------\033[0m\n\n");
-	print_tree(tree, 0, HEAD);
-	printf("\n\t\t\033[1;33m----------------\033[0m\n");
 	table = alloc_table(tree_height);
 	create_table(table, tree, "", tree_height);
-	print_table(table);
 	data->txt = txt;
 	data->table = table;
 	encoded_str = encode_str_ft(txt, table);
 	data->bit_size = strlen((char*)encoded_str);
 	str_to_bytes(&encoded_str, data->bit_size);
-	print_enconded_bytes_str(encoded_str);
 	free_tree(&tree);
 	return (encoded_str);
 }
@@ -80,10 +74,15 @@ int	main(void)
 	fd[1] = open("data/compress_file", O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	read(fd[0], buff, 1024);
 	close(fd[0]);
-	compress_str = ft_encoder(buff, &decoder_data);
-	write(fd[1], compress_str, strlen((char*)compress_str));
+	if (strlen(buff) < 755)
+	{
+		compress_str = ft_encoder(buff, &decoder_data);
+		write(fd[1], compress_str, strlen((char*)compress_str));
+		free(compress_str);
+		conect_process(&decoder_data);
+	}
+	else
+		printf("Sorry that's too much :'( \nTry less tha 755 chars\n");
 	close(fd[1]);
-	free(compress_str);
-	conect_process(&decoder_data);
 	return (0);
 }
