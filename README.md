@@ -26,7 +26,7 @@ Para desenvolver essa utilidade foi usado o algoritmo de huffman.
 
 ## :clipboard: FLUXO E DESENVOLVIMENTO
 
-Como já citado, o algoritmo de huffman é usado aqui para codificar e dedcodificar o input, veremos aqui visualmente o passo a passo que o programa faz, usando como exemplo o input "hello world":
+Como já citado, o algoritmo de huffman é usado aqui para codificar e decodificar o input, veremos aqui visualmente o passo a passo que o programa faz, usando como exemplo o input "hello world":
 
   1. Criar lista de frecuencia ordenada dos caracteres
  
