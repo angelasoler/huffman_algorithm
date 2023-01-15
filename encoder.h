@@ -8,6 +8,7 @@
 #define LEFT 0
 #define RIGHT 1
 #define	HEAD 42
+#define UC unsigned char
 
 typedef struct p_tree
 {
@@ -27,6 +28,13 @@ typedef struct p_sort
 	int		sort;
 }	t_sort;
 
+typedef struct p_compress
+{
+	UC		*aux;
+	UC		*bytes;
+	int		new_size;
+}	t_compress;
+
 t_tree	*find_frecuency(char *txt);
 void	sort_list_by_frecuency(t_tree **tree);
 
@@ -39,6 +47,8 @@ t_tree	*create_huffman_tree(t_tree **huffman_tree);
 
 void	print_tree(t_tree *tree, int size, int flag);
 void	print_table(char **table);
+void	print_lst(t_tree *lst);
+void	print_enconded_bytes_str(UC *encoded_str);
 
 void	free_table(char **table);;
 void	create_table(char **table, t_tree *tree, char *trail, int rows);

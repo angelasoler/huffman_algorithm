@@ -1,26 +1,52 @@
 
 #include "encoder.h"
 
-void	print_lst(t_tree *lst)
+void	str_to_bytes(UC **str, int qbits)
 {
-	t_tree	*aux;
+	t_compress	comp;
+	int			bitwise;
+	int			i;
 
-	aux = lst;
-	printf("\t------FRECUENCY LIST-------");
-	while (aux)
+	comp.aux = *str;
+	if (qbits % 8)
+		comp.new_size = (qbits / 8) + 2;
+	else
+		comp.new_size = (qbits / 8) + 1;
+	comp.bytes = calloc(sizeof(UC), comp.new_size);
+	for (i = 0; i < (comp.new_size - 1); i++)
 	{
-		printf("\n            [%c] => [%d]\n", aux->c, aux->frecuency);
-		aux = aux->next;
+		bitwise = 7;
+		while(bitwise >= 0)
+		{
+			comp.bytes[i] |= (*comp.aux - '0') << bitwise;
+			bitwise--;
+			comp.aux++;
+		}
 	}
-	printf("\t-------------------------\n");
+	free(*str);
+	*str = comp.bytes;
 }
 
-void	ft_decoder(char *txt)
+unsigned char	*encode_str_ft(char *txt, char **table)
+{
+	UC	*encoded_str;
+
+	encoded_str = calloc(sizeof(UC), 1024);
+	while (*txt)
+	{
+		strcat((char*)encoded_str, table[(int)*txt]);
+		txt++;
+	}
+	return (encoded_str);
+}
+
+void	ft_encoder(char *txt)
 {
 	t_tree	*tree;
 	t_tree	*frecuency_lst;
 	char	**table;
 	int		tree_height;
+	UC	*encoded_str;
 
 	frecuency_lst = find_frecuency(txt);
 	print_lst(frecuency_lst);
@@ -32,8 +58,12 @@ void	ft_decoder(char *txt)
 	table = alloc_table(tree_height);
 	create_table(table, tree, "", tree_height);
 	print_table(table);
+	encoded_str = encode_str_ft(txt, table);
+	str_to_bytes(&encoded_str, strlen((char*)encoded_str));
+	print_enconded_bytes_str(encoded_str);
 	free_tree(&tree);
 	free_table(table);
+	free(encoded_str);
 }
 
 int	main(void)
@@ -45,7 +75,7 @@ int	main(void)
 	fd = open("file", O_RDONLY);
 	read(fd, buff, 200);
 	close(fd);
-	ft_decoder(buff);
+	ft_encoder(buff);
 	free(buff);
 	return (0);
 }

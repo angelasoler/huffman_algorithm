@@ -1,27 +1,5 @@
+
 #include "encoder.h"
-
-int	count_lst(t_tree *lst)
-{
-	int ret;
-
-	ret = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		ret++;
-	}
-	return (ret);
-}
-
-t_tree	*swap_nodes(t_tree *p1, t_tree *p2)
-{
-	t_tree	*aux;
-
-	aux = p2->next;
-	p2->next = p1;
-	p1->next = aux;
-	return (p2);
-}
 
 void	put_node(t_tree **lst, t_tree *node)
 {
@@ -49,4 +27,41 @@ t_tree	*create_node(char l, int f, t_tree *right, t_tree *left)
 	node->right = right;
 	node->left = left;
 	return (node);
+}
+
+int	count_lst(t_tree *lst)
+{
+	int ret;
+
+	ret = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		ret++;
+	}
+	return (ret);
+}
+
+t_tree	*swap_nodes(t_tree *p1, t_tree *p2)
+{
+	t_tree	*aux;
+
+	aux = p2->next;
+	p2->next = p1;
+	p1->next = aux;
+	return (p2);
+}
+
+void	print_lst(t_tree *lst)
+{
+	t_tree	*aux;
+
+	aux = lst;
+	printf("\t------FRECUENCY LIST-------");
+	while (aux)
+	{
+		printf("\n            [%c] => [%d]\n", aux->c, aux->frecuency);
+		aux = aux->next;
+	}
+	printf("\t-------------------------\n");
 }
