@@ -1,6 +1,6 @@
 <h1 align="center">
 :woman_technologist:
-      Programa de compressão e descompressão de string
+      Programa de compressão e descompressão de texto
 </h1>
 
 ## :computer: HOWTO
@@ -89,9 +89,11 @@ Como já citado, o algoritmo de huffman é usado aqui para codificar e dedcodifi
  
    ## :hammer_and_wrench: WORK IN PROGRESS
    
-   Idealmente o programa deve usar recursos como gerenciamento de processos, rodando paralelamente os processos de compressão e descompressão e recebendo e entregando dados através de memória compartilhada, alcançando maior desenpenho em geral e uma usabilidade mais interessante.
+   Idealmente o programa deve usar recursos como gerenciamento de processos, rodando paralelamente os processos de compressão e descompressão e recebendo e entregando dados através de operações de memória compartilhada, alcançando maior desenpenho em geral e uma usabilidade mais interessante.
    
 ## :gem: CONCLUSÕES
+  - Otimizar o uso de recursos de memoria em um programa de compressão é fundamental pois incluso é a basse do conceito.
+  - Colaborando chegamos mais longe.
   
 
       
