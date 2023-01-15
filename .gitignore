@@ -1,3 +1,5 @@
 labs
 *.o
 .vscode/
+.gitignore
+data/.input_file
