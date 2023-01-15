@@ -5,12 +5,12 @@ CC =	cc
 
 WFLAGS = -Wall -Werror -Wextra
 
-SRC =	encoder.c \
-		huffman_tree_utils.c \
-		list_utils.c \
-		dev_utils.c \
-		binary_table_utils.c \
-		clear_utils.c
+SRC =	encoder/encoder.c \
+		encoder/huffman_tree_utils.c \
+		encoder/list_utils.c \
+		encoder/dev_utils.c \
+		encoder/binary_table_utils.c \
+		encoder/clear_utils.c
 
 OBJ =	$(SRC:.c=.o)
 
@@ -30,6 +30,6 @@ fclean: clean
 	rm -rf $(NAME)
 
 clean:
-	@rm -rf *.o
+	@rm -rf encoder/*.o
 
 .PONHY: re fclean clean all

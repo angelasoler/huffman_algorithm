@@ -1,5 +1,5 @@
 
-#include "encoder.h"
+#include "../includes/encoder.h"
 
 void	free_table(char **table)
 {

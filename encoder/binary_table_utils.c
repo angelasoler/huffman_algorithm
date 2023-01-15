@@ -1,5 +1,5 @@
 
-#include "encoder.h"
+#include "../includes/encoder.h"
 
 int	tree_height_ft(t_tree *tree)
 {

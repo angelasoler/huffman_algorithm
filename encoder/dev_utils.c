@@ -1,4 +1,5 @@
-#include "encoder.h"
+
+#include "../includes/encoder.h"
 
 void	print_enconded_bytes_str(UC *encoded_str)
 {

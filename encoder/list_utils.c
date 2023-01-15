@@ -1,5 +1,5 @@
 
-#include "encoder.h"
+#include "../includes/encoder.h"
 
 void	put_node(t_tree **lst, t_tree *node)
 {

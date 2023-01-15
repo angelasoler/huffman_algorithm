@@ -1,4 +1,4 @@
-#include "encoder.h"
+#include "../includes/encoder.h"
 
 t_tree	*remove_two_nodes(t_tree **huffman_tree)
 {

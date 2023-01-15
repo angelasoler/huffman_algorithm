@@ -1,5 +1,5 @@
 
-#include "encoder.h"
+#include "../includes/encoder.h"
 
 void	str_to_bytes(UC **str, int qbits)
 {
@@ -40,7 +40,7 @@ unsigned char	*encode_str_ft(char *txt, char **table)
 	return (encoded_str);
 }
 
-void	ft_encoder(char *txt)
+UC	*ft_encoder(char *txt)
 {
 	t_tree	*tree;
 	t_tree	*frecuency_lst;
@@ -63,19 +63,24 @@ void	ft_encoder(char *txt)
 	print_enconded_bytes_str(encoded_str);
 	free_tree(&tree);
 	free_table(table);
-	free(encoded_str);
+	return (encoded_str);
 }
 
 int	main(void)
 {
 	char	*buff;
-	int		fd;
+	int		fd[2];
+	UC	*compress_str;
 
 	buff = calloc(sizeof(char), 200);
-	fd = open("file", O_RDONLY);
-	read(fd, buff, 200);
-	close(fd);
-	ft_encoder(buff);
+	fd[0] = open("data/input_file", O_RDONLY);
+	fd[1] = open("data/compress_file", O_TRUNC | O_CREAT | O_WRONLY, 0644);
+	read(fd[0], buff, 200);
+	close(fd[0]);
+	compress_str = ft_encoder(buff);
 	free(buff);
+	write(fd[1], compress_str, strlen((char*)compress_str));
+	close(fd[1]);
+	free(compress_str);
 	return (0);
 }
