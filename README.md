@@ -8,7 +8,7 @@
   1. Coloque o input que deseja comprimir no arquivo `data/file`.*
   2. Rode o comando `make` na pasta raiz do projeto.
   3. Rode o binario `./labs` na pasta raiz.
-  4. Ao rodar o programa se exibiram na tela:
+  4. Ao rodar o programa se exibirão na tela:
    - Texto descomprimido
    - Tempo da operações de descompressão.
    - Quantidade de bytes totais.
